@@ -1,6 +1,25 @@
 // ------------------------------
 // Styling for files located in the openedx/features repository.
 
+// Course sidebar sections
+.course-sidebar {
+  .section {
+    h3 {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+    }
+
+    .icon {
+      width: 20px;
+      text-align: center;
+    }
+
+    &:not(:first-child) {
+      margin-top: $baseline;
+    }
+  }
+}
+
 // Course call to action message
 .course-message {
   display: flex;
@@ -163,7 +182,7 @@
 
 // Course outline
 .course-outline {
-  color: $lms-gray;
+  color: theme-color("secondary");
 
   .block-tree {
     margin: 0;
@@ -227,7 +246,7 @@
             .subsection-text {
               .details {
                 font-size: $body-font-size;
-                color: $lms-gray;
+                color: theme-color("secondary");
               }
             }
 
@@ -265,7 +284,7 @@
 .date-summary-container {
   .date-summary {
     @include clearfix;
-    @include border-left(3px solid $gray-l3);
+    @include border-left(3px solid $gray-300);
 
     padding: $baseline/2;
 
@@ -273,14 +292,14 @@
       font-size: 0.9rem;
       line-height: 1;
       font-weight: $font-bold;
-      color: $lms-gray;
+      color: theme-color("secondary");
     }
 
     .description {
       margin-top: $baseline/2;
       margin-bottom: $baseline/2;
       display: inline-block;
-      color: $gray-d1;
+      color: theme-color("secondary");
     }
 
     .date-summary-link {
@@ -293,7 +312,7 @@
     }
 
     .date {
-      color: $gray-d1;
+      color: theme-color("secondary");
     }
 
     &-todays-date {

@@ -17,6 +17,8 @@
   }
 
   .preview-actions {
+    @include padding-left(0);
+
     display: inline-block;
     margin-bottom: 0;
 
@@ -67,9 +69,9 @@
 
     background-color: rgb(229, 234, 236);
     padding: $baseline ($baseline*2);
-    border-left: 4px solid $m-blue-l1;
+    border-left: 4px solid theme-color("primary");
     margin: 0 auto;
-    color: $gray-d2;
+    color: theme-color("secondary");
 
     .exam-text {
       display: inline-block;
@@ -81,10 +83,10 @@
     }
 
     .pull-right {
-      color: $gray-d1;
+      color: theme-color("secondary");
 
       b {
-        color: $gray-d3;
+        color: theme-color("dark");
       }
     }
 
@@ -93,7 +95,7 @@
     }
 
     &.low-time {
-      color: $gray-l3;
+      color: theme-color("light");
       background-color: rgb(79, 88, 92);
 
       a {
@@ -102,7 +104,7 @@
       }
 
       .pull-right {
-        color: $gray-l3;
+        color: theme-color("light");
 
         b {
           color: theme-color("inverse");
