@@ -124,7 +124,8 @@ var wpconfig = {
                 test: /(.scss|.css)$/,
                 include: [
                     /studio-frontend/,
-                    /paragon/
+                    /paragon/,
+                    /font-awesome/,
                 ],
                 use: [
                     'style-loader',
