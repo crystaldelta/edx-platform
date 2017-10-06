@@ -217,9 +217,12 @@ function($, Backbone, _, gettext, moment, ViewUtils, HtmlUtils, StringUtils, Tra
         },
 
         renderProviders: function(state) {
-            var state = state ? state : this.selectedProvider ? 'selected' : 'empty',
-                $transcriptProviderWrapperEl = this.$el.find('.transcript-provider-wrapper');
+            var $transcriptProviderWrapperEl = this.$el.find('.transcript-provider-wrapper');
+            if (!state) {
+                state = this.selectedProvider ? 'selected' : 'empty';   // eslint-disable-line no-param-reassign
+            }
 
+            // If no transcription plans are sentm return.
             if (!this.availableTranscriptionPlans) {
                 return;
             }
@@ -455,8 +458,8 @@ function($, Backbone, _, gettext, moment, ViewUtils, HtmlUtils, StringUtils, Tra
         },
 
         updateSuccessResponseStatus: function(data, successMessage) {
-            var dateModified = data ? moment.utc(data.modified).format('ll') : '',
-                successMessage = successMessage ? successMessage : gettext('Settings updated');
+            var dateModified = data ? moment.utc(data.modified).format('ll') : '';
+            successMessage = successMessage ? successMessage : gettext('Settings updated'); // eslint-disable-line no-param-reassign, no-unneeded-ternary, max-len
 
             // Update last modified date
             if (dateModified) {
@@ -655,7 +658,7 @@ function($, Backbone, _, gettext, moment, ViewUtils, HtmlUtils, StringUtils, Tra
             }
         },
 
-        saveTranscriptOrgCredentials: function() {
+        saveOrganizationCredentials: function() {
             var self = this;
             // First clear response status if present already
             this.clearResponseStatus();
@@ -687,7 +690,7 @@ function($, Backbone, _, gettext, moment, ViewUtils, HtmlUtils, StringUtils, Tra
 
         updateOrganizationCredentials: function() {
             if (this.validateOrganizationCredentials()) {
-                this.saveTranscriptOrgCredentials();
+                this.saveOrganizationCredentials();
             }
         },
 
@@ -713,7 +716,7 @@ function($, Backbone, _, gettext, moment, ViewUtils, HtmlUtils, StringUtils, Tra
                         key: this.selectedProvider,
                         name: this.availableTranscriptionPlans[this.selectedProvider].display_name
                     },
-                    organizationCredentialsExists : this.transcriptOrganizationCredentials[this.selectedProvider],
+                    organizationCredentialsExists: this.transcriptOrganizationCredentials[this.selectedProvider],
                     CIELO24: CIELO24,
                     THREE_PLAY_MEDIA: THREE_PLAY_MEDIA
                 })
@@ -760,7 +763,7 @@ function($, Backbone, _, gettext, moment, ViewUtils, HtmlUtils, StringUtils, Tra
             HtmlUtils.setHtml(this.$el, this.template({}));
 
             // Render footer
-             HtmlUtils.setHtml(
+            HtmlUtils.setHtml(
                 this.$el.find('.course-video-settings-footer'),
                 this.updateSettingsFooterTemplate({
                     dateModified: dateModified
@@ -803,7 +806,7 @@ function($, Backbone, _, gettext, moment, ViewUtils, HtmlUtils, StringUtils, Tra
         },
 
         closeCourseVideoSettings: function() {
-            // TODO: Slide out when closing settings pane. We may need to hide the view instead of destroying it.
+            // TODO: Slide out when closing settings pane. See EDUCATOR-1477
 
             // Trigger destroy transcript event.
             Backbone.trigger('coursevideosettings:destroyCourseVideoSettingsView');
